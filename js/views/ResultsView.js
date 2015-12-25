@@ -8,6 +8,8 @@ app.ResultsView = Backbone.View.extend({
   },
 
   initialize: function( testResults ){
+    this.$input = this.$('#search');
+
     this.collection = new app.ResultList( testResults );
     this.render();
 
@@ -28,6 +30,9 @@ app.ResultsView = Backbone.View.extend({
   },
 
   searchForFood: function(e){
-    console.log("I did it.");
+    if(event.which !== 13 || !this.$input.val().trim()){
+      return;
+    }
+    console.log(this.$input.val().trim());
   }
 });
