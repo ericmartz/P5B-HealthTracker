@@ -4,7 +4,7 @@ app.ResultsView = Backbone.View.extend({
   el: '#results',
 
   events: {
-    'keypress #search': 'searchForFood'
+    'keyup #search': 'searchForFood'
   },
 
   initialize: function( testResults ){
@@ -30,9 +30,12 @@ app.ResultsView = Backbone.View.extend({
   },
 
   searchForFood: function(e){
-    if(event.which !== 13 || !this.$input.val().trim()){
-      return;
-    }
+    // Had to put in looking for the enter key.
+    // Not sure why yet, but when a keypress was entered, prior to adding the if statement,
+    // The console.log was always one character behind. 
+    // if(event.which !== 13 || !this.$input.val().trim()){
+    //   return;
+    // }
     console.log(this.$input.val().trim());
   }
 });
