@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!-- 
+    I based the structure of my application off the Library Book App found in the Developing Backbone Book
+    by Addy Osmani.    
+  -->
   <meta charset="UTF-8">
   <title>Health Tracker</title>
 </head>
 <body>
   <h1>Eric's Health Tracker</h1>
   <input id="search" type="search">
-  <section id="results">
-    <ul></ul>
-  </section>
-  <script type="text/template" id="results-template">
-    <section id="results-view">
-      <ul id="results"></ul> 
+  <div id="results">
+  </div>
+  <script type="text/template" id="resultsTemplate">
+    <section id="resultsContainer">
+      <ul>
+        <li><%= title %></li>
+        <li><%= url %></li>
+      </ul> 
     </section>
   </script>
 
@@ -21,5 +27,10 @@
   <script src="js/lib/underscore-1.8.3.js"></script>
   <script src="js/lib/backbone-1.2.2.js"></script>
   <script src="js/lib/backboneLocalStorage-1.1.16.js"></script>
+  <script src="js/models/result.js"></script>
+  <script src="js/collections/results.js"></script>
+  <script src="js/views/ResultView.js"></script>
+  <script src="js/views/ResultsView.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
