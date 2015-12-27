@@ -38,6 +38,10 @@ app.ResultsView = Backbone.View.extend({
 
   deleteResult: function(child){
     console.log(child);
+    // Not sure on this one.  When I create the search results, there is a result view created and added
+    // to the collection and all the results are added to the view.
+    // I tried to figure out how to access the resultView variable listed above, but it is no longer accessible
+    // once the renderResult function completes.
     var deleteItem = new app.ResultView({
       model: child
     });
@@ -54,10 +58,9 @@ app.ResultsView = Backbone.View.extend({
       return;
     }
 
-    // app.collection.each(function(child){
-    //   self.deleteResult(child);
-    // });
-
+    // For loop goes through the existing collection and then sends off a call to deleteResult.
+    // This allows the APP to delete old search results and add new search results each time the user
+    // starts searching for a new food item. 
     for(var i = (app.collection.models.length - 1); i > -1; i--){
       self.deleteResult(app.collection.models[i]);
     }
