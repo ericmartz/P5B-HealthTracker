@@ -9,5 +9,5 @@ $(function() {
         { title: 'Result2', url: 'www.google.com' }
     ];
 
-    new app.ResultsView( results );
+    new app.ResultsView(results);
 });

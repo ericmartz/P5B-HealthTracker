@@ -7,22 +7,29 @@ app.ResultsView = Backbone.View.extend({
     'keyup #search': 'searchForFood'
   },
 
-  initialize: function( testResults ){
+  initialize: function(){
     this.$input = this.$('#search');
 
-    this.collection = new app.ResultList( testResults );
-    this.render();
+    // Originally app.collection was referred to as this.collection.
+    // to add items to a collection, I had to change this.collection to app.collection, so that the collection
+    // was accessible across the whole app.
+    // I tried to create a global self variable, and then set it to 'this' context within the initialize
+    // function.  However, that did not work.  Attaching the collection to the app variable fixed the issue.
+    // Looke at SO, and some blog articles about rendering and adding to collections and did not find a better way.
+    app.collection = new app.ResultList();
+    // this.render();
 
-    // this.listenTo(this.collection, 'add', this.renderResult);
+    this.listenTo(app.collection, 'add', this.renderResult);
   },
 
   render: function(){
-    this.collection.each(function(item){
+    app.collection.each(function(item){
       this.renderResult(item);
     }, this);
   },
 
   renderResult: function(item){
+    // console.log(item);
     var resultView = new app.ResultView({
       model: item
     });
@@ -30,14 +37,22 @@ app.ResultsView = Backbone.View.extend({
   },
 
   searchForFood: function(e){
+    // Got this bit of code (lines 37 - 39) from the Backbone TODO MVC example.
+    // Originally, I thought I would just let a search fire off everytime the user pressed the key,
+    // However, I thought the APP probably would not update fast enough, and it would be best
+    // to let the user notify the APP when the search term was correctly entered.
     if(event.which !== 13 || !this.$input.val().trim()){
       return;
     }
-    console.log(this.$input.val().trim());
-    getNutritionixInfo(this.$input.val().trim());
+
+    getNutritionixInfo(this.$input.val().trim()).done(function(data){
+      var response = data.hits;
+      var self = this;
+      // console.log(response);
+      for(var i=0; i < response.length; i++){
+        console.log(response[i].fields.item_name);
+        app.collection.add(new app.Result({title: response[i].fields.item_name}));
+      }
+    });
   }
 });
-
-// 'https://api.nutritionix.com/v1_1/search/
-// cheddar%20cheese?
-// fields=item_name%2Citem_id%2Cbrand_name%2Cnf_calories%2Cnf_total_fat&appId=2f93c877&appKey=856fd9dc7309f10e7d89e52e81dccf78'
