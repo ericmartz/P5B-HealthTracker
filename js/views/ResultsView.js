@@ -15,11 +15,12 @@ app.ResultsView = Backbone.View.extend({
     // was accessible across the whole app.
     // I tried to create a global self variable, and then set it to 'this' context within the initialize
     // function.  However, that did not work.  Attaching the collection to the app variable fixed the issue.
-    // Looke at SO, and some blog articles about rendering and adding to collections and did not find a better way.
+    // Looked at SO, and some blog articles about rendering and adding to collections and did not find a better way.
     app.collection = new app.ResultList();
     // this.render();
 
     this.listenTo(app.collection, 'add', this.renderResult);
+    //this.listenTo(app.collecton, 'remove', this.deleteResult);
   },
 
   render: function(){
@@ -29,14 +30,22 @@ app.ResultsView = Backbone.View.extend({
   },
 
   renderResult: function(item){
-    // console.log(item);
     var resultView = new app.ResultView({
       model: item
     });
     this.$el.append(resultView.render().el);
   },
 
+  deleteResult: function(child){
+    console.log(child);
+    var deleteItem = new app.ResultView({
+      model: child
+    });
+    deleteItem.destroy();
+  },
+
   searchForFood: function(e){
+    var self = this;
     // Got this bit of code (lines 37 - 39) from the Backbone TODO MVC example.
     // Originally, I thought I would just let a search fire off everytime the user pressed the key,
     // However, I thought the APP probably would not update fast enough, and it would be best
@@ -45,14 +54,26 @@ app.ResultsView = Backbone.View.extend({
       return;
     }
 
+    // app.collection.each(function(child){
+    //   self.deleteResult(child);
+    // });
+
+    for(var i = (app.collection.models.length - 1); i > -1; i--){
+      self.deleteResult(app.collection.models[i]);
+    }
+
     getNutritionixInfo(this.$input.val().trim()).done(function(data){
       var response = data.hits;
       var self = this;
       // console.log(response);
       for(var i=0; i < response.length; i++){
-        console.log(response[i].fields.item_name);
+        // console.log(response[i].fields.item_name);
         app.collection.add(new app.Result({title: response[i].fields.item_name}));
       }
+      console.log(app.collection.models);
+      // app.collection.each(function(child){
+      //   console.log(child);
+      // });
     });
   }
 });
