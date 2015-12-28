@@ -2,7 +2,9 @@ var app = app || {};
 
 app.Result = Backbone.Model.extend({
   defaults: {
-    title : '',
-    url : 'test'
+    item_id: '',
+    brand_name: '',
+    item_name: '',
+    nf_calories: '' 
   },
 });
