@@ -4,7 +4,8 @@ app.ResultsView = Backbone.View.extend({
   el: '#results',
 
   events: {
-    'keyup #search': 'searchForFood'
+    'keyup #search': 'searchForFood',
+    'click li': 'addToTotal'
   },
 
   initialize: function(){
@@ -68,7 +69,7 @@ app.ResultsView = Backbone.View.extend({
     getNutritionixInfo(this.$input.val().trim()).done(function(data){
       var response = data.hits;
       var self = this;
-      console.log(response);
+      // console.log(response);
       for(var i=0; i < response.length; i++){
         // console.log(response[i].fields.item_name);
         app.collection.add(new app.Result({
@@ -80,5 +81,11 @@ app.ResultsView = Backbone.View.extend({
       }
       // console.log(app.collection.models);
     });
+  },
+
+  addToTotal: function(e){
+    e.preventDefault();
+    console.log(e);
   }
+
 });
