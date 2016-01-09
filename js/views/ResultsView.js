@@ -4,8 +4,7 @@ app.ResultsView = Backbone.View.extend({
   el: '#results',
 
   events: {
-    'keyup #search': 'searchForFood',
-    'click li': 'addToTotal'
+    'keyup #search': 'searchForFood'
   },
 
   initialize: function(){
@@ -18,10 +17,8 @@ app.ResultsView = Backbone.View.extend({
     // function.  However, that did not work.  Attaching the collection to the app variable fixed the issue.
     // Looked at SO, and some blog articles about rendering and adding to collections and did not find a better way.
     app.collection = new app.ResultList();
-    // this.render();
 
     this.listenTo(app.collection, 'add', this.renderResult);
-    //this.listenTo(app.collecton, 'remove', this.deleteResult);
   },
 
   render: function(){
@@ -69,7 +66,7 @@ app.ResultsView = Backbone.View.extend({
     getNutritionixInfo(this.$input.val().trim()).done(function(data){
       var response = data.hits;
       var self = this;
-      // console.log(response);
+      //console.log(response);
       for(var i=0; i < response.length; i++){
         // console.log(response[i].fields.item_name);
         app.collection.add(new app.Result({
@@ -79,13 +76,7 @@ app.ResultsView = Backbone.View.extend({
           nf_calories: response[i].fields.nf_calories
         }));
       }
-      // console.log(app.collection.models);
+      //console.log(app.collection.models);
     });
-  },
-
-  addToTotal: function(e){
-    e.preventDefault();
-    console.log(e);
   }
-
 });
