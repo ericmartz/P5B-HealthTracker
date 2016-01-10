@@ -9,7 +9,6 @@ app.DailyItemsView = Backbone.View.extend({
 
     this.listenTo(app.totals_collection, 'add', this.renderItem);
 
-    console.log()
   },
 
   // Leaving renderTotals here for now.  However, rather than using render totals, I found I needed to 
@@ -26,6 +25,6 @@ app.DailyItemsView = Backbone.View.extend({
       model: item
     });
     this.$el.append(itemView.render().el);
-  },
+  }
 
 });

@@ -12,6 +12,8 @@
 </head>
 <body>
   <h1>Eric's Health Tracker</h1>
+  <div id="total-calories">
+  </div>
   <div id="results">
     <input id="search" type="search">
   </div>
@@ -33,21 +35,23 @@
     </section>
   </script>
 
+  <script type="text/template" id="totalCaloriesTemplate">
+    <section id="totalCaloriesContainer">
+      <p>Total Calores: <%= totalCalories %></p>
+    </section>
+  </script>
+
   <!-- Our libraries to make all this magic happen -->
   <script src="js/lib/jquery-2.1.4.js"></script>
   <script src="js/lib/underscore-1.8.3.js"></script>
   <script src="js/lib/backbone-1.2.2.js"></script>
   <script src="js/lib/backboneLocalStorage-1.1.16.js"></script>
   <script src="js/helpers/nutritionix.js"></script>
-
-
   <script src="js/models/dailyItem.js"></script>
   <script src="js/collections/dailyItemsList.js"></script>
+  <script src="js/views/total-calories-view.js"></script>
   <script src="js/views/DailyItemView.js"></script>
   <script src="js/views/DailyItemsView.js"></script>
-
-
-  
   <script src="js/models/result.js"></script>
   <script src="js/collections/results.js"></script>
   <script src="js/views/ResultView.js"></script>

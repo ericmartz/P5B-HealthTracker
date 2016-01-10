@@ -31,7 +31,7 @@ app.ResultView = Backbone.View.extend({
   addToTotals: function(e){
     e.preventDefault();
     var name = this.model;
-    console.log(name);
+    // console.log(name);
     app.totals_collection.add(new app.DailyItem({
       item_id: name.attributes.item_id,
       item_name: name.attributes.item_name,
