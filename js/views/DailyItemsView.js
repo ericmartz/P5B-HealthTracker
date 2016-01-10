@@ -13,7 +13,8 @@ app.DailyItemsView = Backbone.View.extend({
   },
 
   // Leaving renderTotals here for now.  However, rather than using render totals, I found I needed to 
-  // use renderItem when listening to app.totals_collection.  
+  // use renderItem when listening to app.totals_collection. So when an item is added to the totals_collection
+  // then that one item is rendered.  If I use the renderTotals function, then the whole collection is rendered. 
   renderTotals: function(){
     app.totals_collection.each(function(item){
       this.renderItem(item);
