@@ -7,14 +7,16 @@ app.TotalCaloriesView = Backbone.View.extend({
 
   initialize: function(){
     this.listenTo(app.totals_collection, 'add', this.totalItems);
+    this.totalCalories = 0;
+    this.$el.text(this.totalCalories);
   },
 
   totalItems: function(){
-    var totalCalories = 0;
+    this.totalCalories = 0;
     app.totals_collection.each(function(item){
-      totalCalories += item.attributes.nf_calories;
+      this.totalCalories += item.attributes.nf_calories;
     });
-    this.$el.text(totalCalories);
+    this.$el.text(this.totalCalories);
     // console.log(totalCalories);
   }
 
