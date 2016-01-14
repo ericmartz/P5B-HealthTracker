@@ -6,17 +6,20 @@ app.TotalCaloriesView = Backbone.View.extend({
   template: _.template( $( '#totalCaloriesTemplate' ).html() ),
 
   initialize: function(){
+    app.totalCalories = 0;
+    this.$el.text(app.totalCalories);
+
     this.listenTo(app.totals_collection, 'add', this.totalItems);
-    this.totalCalories = 0;
-    this.$el.text(this.totalCalories);
+
+    this.totalItems();
   },
 
   totalItems: function(){
-    this.totalCalories = 0;
+    app.totalCalories = 0;
     app.totals_collection.each(function(item){
-      this.totalCalories += item.attributes.nf_calories;
+      app.totalCalories += item.attributes.nf_calories;
     });
-    this.$el.text(this.totalCalories);
+    this.$el.text(app.totalCalories);
     // console.log(totalCalories);
   }
 

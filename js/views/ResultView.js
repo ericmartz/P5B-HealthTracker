@@ -31,12 +31,14 @@ app.ResultView = Backbone.View.extend({
   addToTotals: function(e){
     e.preventDefault();
     var name = this.model;
-    // console.log(name);
-    app.totals_collection.add(new app.DailyItem({
+    var item = new app.DailyItem({
       item_id: name.attributes.item_id,
       item_name: name.attributes.item_name,
       brand_name: name.attributes.brand_name,
       nf_calories: name.attributes.nf_calories
-    }));
+    })
+    // console.log(name);
+    app.totals_collection.add(item);
+    item.save();
   }
 });
