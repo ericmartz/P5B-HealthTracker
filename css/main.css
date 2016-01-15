@@ -21,18 +21,10 @@ a {
   text-decoration: none;
 }
 
-#results {
-  padding: 1em 0 0 0;
-  text-align: center;
-  width: 50%;
-  float: left;
-}
-
+#results,
 #daily-totals {
   padding: 1em 0 0 0;
   text-align: center;
-  width: 50%;
-  float: right;
 }
 
 #total-calories {
