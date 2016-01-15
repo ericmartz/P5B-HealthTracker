@@ -3,11 +3,16 @@ var app = app || {};
 app.TotalCaloriesView = Backbone.View.extend({
   el: '#total-calories',
   className: 'totalCaloriesContainer',
-  template: _.template( $( '#totalCaloriesTemplate' ).html() ),
+  template: _.template($('#totalCaloriesTemplate').html()),
+
+  events: {
+    'click #clear-totals': 'clearTotals'
+  },
 
   initialize: function(){
     app.totalCalories = 0;
-    this.$el.text(app.totalCalories);
+
+    this.$el.html(this.template({totalCalories: app.totalCalories}));
 
     this.listenTo(app.totals_collection, 'add', this.totalItems);
 
@@ -19,8 +24,13 @@ app.TotalCaloriesView = Backbone.View.extend({
     app.totals_collection.each(function(item){
       app.totalCalories += item.attributes.nf_calories;
     });
-    this.$el.text(app.totalCalories);
+    this.$el.html(this.template({totalCalories: app.totalCalories}));
     // console.log(totalCalories);
+  },
+
+  clearTotals: function(e){
+    e.preventDefault();
+    localStorage.clear();
   }
 
 });

@@ -11,11 +11,15 @@
   <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
-  <h1>Eric's Health Tracker</h1>
+  <h1>You ate how much?</h1>
   <div id="total-calories">
   </div>
   <div id="results">
     <input id="search" type="search">
+    <p id="instructions">
+      Enter your search terms in the seach box and press enter.
+      Click on any of the search results to add it to your list of items eaten.
+    </p>
   </div>
   <div id="daily-totals">
   </div>
@@ -26,7 +30,6 @@
       </ul> 
     </section>
   </script>
-
   <script type="text/template" id="dailyItemsTemplate">
     <section id="dailyTotalsContainer">
       <ul>
@@ -34,9 +37,9 @@
       </ul> 
     </section>
   </script>
-
   <script type="text/template" id="totalCaloriesTemplate">
-    <section id="totalCaloriesContainer">
+    <sectionid="totalCaloriesContainer">
+      <p id="clear-totals">Clear Totals</p>
       <span>Total Calories: <%= totalCalories %></span>
     </section>
   </script>
@@ -54,8 +57,8 @@
   <script src="js/views/DailyItemsView.js"></script>
   <script src="js/models/result.js"></script>
   <script src="js/collections/results.js"></script>
-  <script src="js/views/ResultView.js"></script>
-  <script src="js/views/ResultsView.js"></script>
+  <script src="js/views/result-view.js"></script>
+  <script src="js/views/results-view.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
