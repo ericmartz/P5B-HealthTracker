@@ -8,39 +8,39 @@
   <meta charset="UTF-8">
   <title>Health Tracker</title>
 
+  <link rel="stylesheet" type="text/css" href="css/reset.css">
   <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
-  <h1>You ate how much?</h1>
+  <div id="main-header">
+    <h1 id="title">You ate how much!?</h1>
+  </div>
   <div id="total-calories">
   </div>
   <div id="results">
     <input id="search" type="search">
     <p id="instructions">
-      Enter your search terms in the seach box and press enter.
+      Enter your search terms in the seach box and press enter.<br>
       Click on any of the search results to add it to your list of items eaten.
     </p>
   </div>
   <div id="daily-totals">
+    <h2 id="food-items-heading">What you have eaten...</h2>
   </div>
   <script type="text/template" id="resultsTemplate">
-    <section id="resultsContainer">
       <ul>
         <li data-id="<%= item_id %>"><%= brand_name %> <%= item_name %>: <%= nf_calories %> calories</li>
       </ul> 
-    </section>
   </script>
   <script type="text/template" id="dailyItemsTemplate">
-    <section id="dailyTotalsContainer">
       <ul>
         <li data-id="<%= item_id %>"><%= brand_name %> <%= item_name %>: <%= nf_calories %> calories</li>
       </ul> 
-    </section>
   </script>
   <script type="text/template" id="totalCaloriesTemplate">
     <sectionid="totalCaloriesContainer">
-      <p id="clear-totals">Clear Totals</p>
-      <span>Total Calories: <%= totalCalories %></span>
+      <h2 id="calorie-total">Total Calories: <%= totalCalories %></h2>
+      <span id="clear-totals">Clear Totals</span>
     </section>
   </script>
 

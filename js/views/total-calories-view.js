@@ -16,7 +16,16 @@ app.TotalCaloriesView = Backbone.View.extend({
 
     this.listenTo(app.totals_collection, 'add', this.totalItems);
 
+    this.listenTo(app.totals_collection, 'destroy', this.totalItems);
+
     this.totalItems();
+  },
+
+  deleteFoodItem: function(child){
+    var deleteItem = new app.DailyItemView({
+      model: child
+    });
+    deleteItem.destroy();
   },
 
   totalItems: function(){
@@ -29,8 +38,13 @@ app.TotalCaloriesView = Backbone.View.extend({
   },
 
   clearTotals: function(e){
+    var self = this;
     e.preventDefault();
     localStorage.clear();
+
+    for(var i = (app.totals_collection.models.length - 1); i > -1; i--){
+      self.deleteFoodItem(app.totals_collection.models[i]);
+    }
   }
 
 });
