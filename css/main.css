@@ -68,6 +68,13 @@ a {
   font-size: 2em;
 }
 
+/* Added a margin to make list items more distinct */
+.dailyTotalsContainer {
+  text-align: center;
+  width: 50%;
+  margin: 1.25em auto;
+}
+
 @media screen and (min-width: 768px) {
   #results,
   #daily-totals {

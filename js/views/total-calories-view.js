@@ -13,6 +13,8 @@ app.TotalCaloriesView = Backbone.View.extend({
   // initialize sets the totalCalories to 0,
   // sends the info to the view,
   // and creates the listeners for when items are added or deleted from the totals_collection
+  // totalItems is called in the initialize function so that if there are items in the totals_collection
+  // it will total the calories when the app loads
   initialize: function(){
     app.totalCalories = 0;
 
@@ -20,6 +22,8 @@ app.TotalCaloriesView = Backbone.View.extend({
 
     this.listenTo(app.totals_collection, 'add', this.totalItems);
     this.listenTo(app.totals_collection, 'destroy', this.totalItems);
+
+    this.totalItems();
   },
 
   // deleteFoodItem accepts a single foot item and send a request to the DailyItemView to delete the model
@@ -36,6 +40,7 @@ app.TotalCaloriesView = Backbone.View.extend({
     app.totals_collection.each(function(item){
       app.totalCalories += item.attributes.nf_calories;
     });
+    app.totalCalories = Math.round(app.totalCalories);
     this.$el.html(this.template({totalCalories: app.totalCalories}));
     // console.log(totalCalories);
   },

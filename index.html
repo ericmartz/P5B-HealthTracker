@@ -34,8 +34,10 @@
   </script>
   <script type="text/template" id="dailyItemsTemplate">
     <ul>
-      <li data-id="<%= item_id %>"><%= brand_name %> <%= item_name %>: <%= nf_calories %> calories</li>
-    </ul> 
+      <li><%= brand_name %> <%= item_name %>: <%= nf_calories %> calories</li>
+    </ul>
+    <!-- Added a horizontal rule here to make food items distinct-->
+    <hr>
   </script>
   <script type="text/template" id="totalCaloriesTemplate">
     <sectionid="totalCaloriesContainer">
