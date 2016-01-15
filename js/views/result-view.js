@@ -9,15 +9,18 @@ app.ResultView = Backbone.View.extend({
     'click li': 'addToTotals'
   },
 
+  // initialize creates a listener for when a search result is destroyed
   initialize: function(){
     this.listenTo(this.model, 'destroy', this.remove);
   },
 
+  // render renders the individual search results
   render: function() {
     this.$el.html(this.template(this.model.attributes));
     return this;
   },
 
+  // destroy destroys the inidividual models
   destroy: function(){
     this.model.destroy();
     this.remove();
@@ -28,6 +31,7 @@ app.ResultView = Backbone.View.extend({
   // https://lostechies.com/derickbailey/2011/10/11/backbone-js-getting-the-model-for-a-clicked-element/
   // So I moved addToTotals here and this became super easy.  Also, I feel like I understand Backbone more clearly now,
   // especially why you would want to separate the collection view and the model view.
+  // addToTotals adds the individual model items to the totals_collection and then saves it to localStorage
   addToTotals: function(e){
     e.preventDefault();
     var name = this.model;

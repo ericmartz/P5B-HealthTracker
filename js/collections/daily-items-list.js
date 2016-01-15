@@ -1,5 +1,6 @@
 var app = app || {};
 
+// DailyItemsList is the collection that holds food items the user has selected
 app.DailyItemsList = Backbone.Collection.extend({
   model : app.DailyItem,
 

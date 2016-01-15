@@ -3,14 +3,15 @@ var app = app || {};
 app.DailyItemsView = Backbone.View.extend({
   el: '#daily-totals',
 
+  // initialize creates a listener for when items are added to the totals_collection,
+  // and fetchs all items that are already in the totals_collection
   initialize: function(){
-
     this.listenTo(app.totals_collection, 'add', this.renderItem);
 
     app.totals_collection.fetch();
-
   },
 
+  // render is run to display items that already exist in the totals_collection
   render: function(){
     app.totals_collection.each(this.renderItem, this);
   },
@@ -24,11 +25,11 @@ app.DailyItemsView = Backbone.View.extend({
     }, this);
   },
 
+  // renderItem creates the items in the model and renders it.
   renderItem: function(item){
     var itemView = new app.DailyItemView({
       model: item
     });
     this.$el.append(itemView.render().el);
   }
-
 });

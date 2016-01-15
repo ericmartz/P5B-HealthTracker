@@ -1,5 +1,6 @@
 var app = app || {};
 
+// TotalCaloriesView manages the display of how many calories the user has entered
 app.TotalCaloriesView = Backbone.View.extend({
   el: '#total-calories',
   className: 'totalCaloriesContainer',
@@ -9,18 +10,19 @@ app.TotalCaloriesView = Backbone.View.extend({
     'click #clear-totals': 'clearTotals'
   },
 
+  // initialize sets the totalCalories to 0,
+  // sends the info to the view,
+  // and creates the listeners for when items are added or deleted from the totals_collection
   initialize: function(){
     app.totalCalories = 0;
 
     this.$el.html(this.template({totalCalories: app.totalCalories}));
 
     this.listenTo(app.totals_collection, 'add', this.totalItems);
-
     this.listenTo(app.totals_collection, 'destroy', this.totalItems);
-
-    this.totalItems();
   },
 
+  // deleteFoodItem accepts a single foot item and send a request to the DailyItemView to delete the model
   deleteFoodItem: function(child){
     var deleteItem = new app.DailyItemView({
       model: child
@@ -28,6 +30,7 @@ app.TotalCaloriesView = Backbone.View.extend({
     deleteItem.destroy();
   },
 
+  // totalItems loops through the totals_collection and adds the total of all calories in it.
   totalItems: function(){
     app.totalCalories = 0;
     app.totals_collection.each(function(item){
@@ -37,6 +40,7 @@ app.TotalCaloriesView = Backbone.View.extend({
     // console.log(totalCalories);
   },
 
+  // clearTotals clears out the localStorage and then clears out the totals_collection
   clearTotals: function(e){
     var self = this;
     e.preventDefault();
@@ -46,5 +50,4 @@ app.TotalCaloriesView = Backbone.View.extend({
       self.deleteFoodItem(app.totals_collection.models[i]);
     }
   }
-
 });
