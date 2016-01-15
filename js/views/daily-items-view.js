@@ -12,7 +12,7 @@ app.DailyItemsView = Backbone.View.extend({
   },
 
   render: function(){
-    app.totals_collection.each(this.renderItem, this)
+    app.totals_collection.each(this.renderItem, this);
   },
 
   // Leaving renderTotals here for now.  However, rather than listening to renderTotals in line 10, I found I needed to 
