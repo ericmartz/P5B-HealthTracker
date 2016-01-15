@@ -77,6 +77,8 @@ app.ResultsView = Backbone.View.extend({
         }));
       }
       //console.log(app.collection.models);
+    }).fail(function(){
+      window.alert("The search did not work.  Please try again later.")
     });
   }
 });
