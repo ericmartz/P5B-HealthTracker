@@ -1,5 +1,6 @@
 var app = app || {};
 
+// DailyItem holds the items the user has added as selected foods
 app.DailyItem = Backbone.Model.extend({
   defaults: {
     item_id: '',
